@@ -609,7 +609,7 @@ document.getElementById('consultation-modal').addEventListener('click', function
                 }
                 
                 // Send the request
-                const response = await fetch('http://localhost:3000/api/submit-consultation', {
+                const response = await fetch('https://swasthya-backend-plf7.onrender.com/api/submit-consultation', {
                     method: 'POST',
                     body: formData,
                     // Remove credentials include as it's not needed if we're not using cookies
