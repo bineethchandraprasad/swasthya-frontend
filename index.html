@@ -103,7 +103,7 @@
                 </button>
             </div>
             <div class="md:w-1/2 mt-12 md:mt-0">
-                <img src="/api/placeholder/600/400" alt="Online Doctor Consultation" class="rounded-lg shadow-xl">
+                <img src="/sample_doctor4.jpg" alt="Online Doctor Consultation" class="rounded-lg shadow-xl">
             </div>
         </div>
     </section>
@@ -171,9 +171,9 @@
             <div class="grid md:grid-cols-3 gap-8">
                 <!-- Doctor Cards -->
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="/api/placeholder/400/300" alt="Dr. Ananya Sharma" class="w-full h-64 object-cover">
+                    <img src="/sammple_doc.jpg" alt="Dr. Nandan Vadlamudi" class="w-full h-64 object-cover">
                     <div class="p-6">
-                        <h3 class="text-xl font-bold">Dr. Ananya Sharma</h3>
+                        <h3 class="text-xl font-bold">Dr. Nandan Vadlamudi</h3>
                         <p class="text-gray-600 mb-2">Cardiologist</p>
                         <p class="text-sm mb-2">10+ years experience</p>
                         <p class="text-sm mb-4">Available: Mon-Fri, 9AM-5PM</p>
@@ -183,7 +183,7 @@
                     </div>
                 </div>
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="/api/placeholder/400/300" alt="Dr. Rajesh Menon" class="w-full h-64 object-cover">
+                    <img src="/sample_doc2.jpg" alt="Dr. Rajesh Menon" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold">Dr. Rajesh Menon</h3>
                         <p class="text-gray-600 mb-2">Orthopedic Specialist</p>
@@ -195,7 +195,7 @@
                     </div>
                 </div>
                 <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="/api/placeholder/400/300" alt="Dr. Priya Kapoor" class="w-full h-64 object-cover">
+                    <img src="/sample_doc3.jpg" alt="Dr. Priya Kapoor" class="w-full h-64 object-cover">
                     <div class="p-6">
                         <h3 class="text-xl font-bold">Dr. Priya Kapoor</h3>
                         <p class="text-gray-600 mb-2">Pediatrician</p>
@@ -498,7 +498,7 @@
         submitButton.innerHTML = 'Sending...';
         
         // Send the request to your backend
-        const response = await fetch('https://swasthya-backend-plf7.onrender.com/api/contact', {
+        const response = await fetch('http://localhost:3000/api/contact', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -596,7 +596,7 @@ document.getElementById('consultation-modal').addEventListener('click', function
                 }
                 
                 // Send the request
-                const response = await fetch('https://swasthya-backend-plf7.onrender.com/api/submit-consultation', {
+                const response = await fetch('http://localhost:3000/api/submit-consultation', {
                     method: 'POST',
                     body: formData,
                     // Remove credentials include as it's not needed if we're not using cookies
