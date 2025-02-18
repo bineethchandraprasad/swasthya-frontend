@@ -629,6 +629,38 @@
     </div>
 </div>
 
+<!-- Floating WhatsApp Button -->
+<div class="fixed bottom-6 right-6 z-50">
+    <button onclick="openWhatsApp()" class="bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition-transform hover:scale-110 flex items-center gap-2">
+        <i class="fab fa-whatsapp text-2xl"></i>
+        <span class="hidden md:inline">Chat with us</span>
+    </button>
+</div>
+
+<!-- WhatsApp Detection Modal -->
+<div id="whatsapp-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden items-center justify-center z-50">
+    <div class="bg-white rounded-lg w-full max-w-md mx-auto m-4">
+        <div class="p-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Open WhatsApp</h3>
+            <p class="text-gray-600 mb-6">WhatsApp is not installed on your device. You can:</p>
+            <div class="space-y-4">
+                <a href="https://web.whatsapp.com" target="_blank" 
+                   class="block w-full bg-green-500 text-white px-4 py-2 rounded-lg hover:bg-green-600 text-center">
+                    Open WhatsApp Web
+                </a>
+                <a href="https://whatsapp.com/download" target="_blank"
+                   class="block w-full bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 text-center">
+                    Download WhatsApp
+                </a>
+                <button onclick="hideWhatsAppModal()"
+                    class="block w-full border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
     <script>
         document.getElementById('contact-form').addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -936,6 +968,67 @@ document.addEventListener('DOMContentLoaded', function() {
     if (reviewsContainer) {
         reviewsContainer.addEventListener('scroll', () => updateScrollArrows('reviews'));
         updateScrollArrows('reviews');
+    }
+});
+
+// WhatsApp functionality
+function openWhatsApp() {
+    const phoneNumber = "918500881023"; // Your WhatsApp business number
+    const message = "Hi! I'm interested in booking a consultation."; // Pre-filled message
+    
+    // Check if device is mobile
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    
+    if (isMobile) {
+        // Try opening WhatsApp app
+        window.location.href = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+        
+        // If WhatsApp app doesn't open within 2 seconds, show the modal
+        setTimeout(() => {
+            if (document.hidden) {
+                // WhatsApp opened successfully
+                return;
+            }
+            showWhatsAppModal();
+        }, 2000);
+    } else {
+        // On desktop, try to detect if WhatsApp is installed
+        if ('registerProtocolHandler' in navigator) {
+            // Modern browsers support protocol handlers
+            window.location.href = `whatsapp://send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
+            
+            // If WhatsApp desktop app doesn't open within 1 second, open WhatsApp Web
+            setTimeout(() => {
+                if (document.hidden) {
+                    return;
+                }
+                window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+            }, 1000);
+        } else {
+            // Fallback to WhatsApp Web
+            window.open(`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, '_blank');
+        }
+    }
+}
+
+function showWhatsAppModal() {
+    const modal = document.getElementById('whatsapp-modal');
+    modal.classList.remove('hidden');
+    modal.classList.add('flex');
+    document.body.style.overflow = 'hidden';
+}
+
+function hideWhatsAppModal() {
+    const modal = document.getElementById('whatsapp-modal');
+    modal.classList.add('hidden');
+    modal.classList.remove('flex');
+    document.body.style.overflow = 'auto';
+}
+
+// Close modal when clicking outside
+document.getElementById('whatsapp-modal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        hideWhatsAppModal();
     }
 });
     </script>
