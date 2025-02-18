@@ -14,6 +14,99 @@
     <!-- Flatpickr for DateTime Picker -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+    <style>
+        .scroll-container {
+            position: relative;
+            padding: 0 40px;
+            margin: 0 -40px;
+        }
+        
+        .scroll-wrapper {
+            overflow-x: auto;
+            scroll-behavior: smooth;
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none;  /* IE and Edge */
+            padding: 0.5rem 40px;
+            -webkit-overflow-scrolling: touch;
+            scroll-snap-type: x mandatory;
+        }
+        
+        .scroll-wrapper::-webkit-scrollbar {
+            display: none; /* Chrome, Safari and Opera */
+        }
+        
+        .scroll-content {
+            display: flex;
+            gap: 1.5rem;
+            padding: 0.5rem 0;
+            flex-wrap: nowrap;
+            align-items: stretch;
+        }
+        
+        .scroll-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: all 0.3s ease;
+}
+        
+.scroll-arrow:hover {
+    background-color: #f8fafc;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    transform: translateY(-50%) scale(1.05);
+}
+.scroll-content > div {
+    transition: all 0.3s ease;
+}
+
+.scroll-content > div:hover {
+    transform: translateY(-2px);
+}
+        
+        .scroll-arrow.left {
+            left: 10px;
+        }
+        
+        .scroll-arrow.right {
+            right: 10px;
+        }
+        
+        /* Form styles */
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-label {
+            display: flex;
+            align-items: baseline;
+            gap: 0.25rem;
+            margin-bottom: 0.25rem;
+        }
+        
+        .required-field::after {
+            content: "*";
+            color: #dc2626;
+            margin-left: 4px;
+        }
+        
+        .optional-text {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: normal;
+        }
+        </style>
+        
 </head>
 <body class="font-sans">
     <!-- Header -->
@@ -168,87 +261,114 @@
     <section id="doctors" class="py-16 bg-white">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12">Our Doctors</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Doctor Cards -->
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="./sammple_doc.jpg" alt="Dr. Nandan Vadlamudi" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold">Dr. Nandan Vadlamudi</h3>
-                        <p class="text-gray-600 mb-2">Cardiologist</p>
-                        <p class="text-sm mb-2">10+ years experience</p>
-                        <p class="text-sm mb-4">Available: Mon-Fri, 9AM-5PM</p>
-                        <button onclick="showConsultationForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">
-                            Book Appointment
-                        </button>
+            <div class="scroll-container">
+                <button class="scroll-arrow left" onclick="scrollDoctors('left')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="scroll-wrapper">
+                    <div class="scroll-content">
+                        <div class="flex-none w-80 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-duration-300">
+                            <img src="./sammple_doc.jpg" alt="Dr. Nandan Vadlamudi" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                               <h3 class="text-xl font-bold">Dr. Nandan Vadlamudi</h3>
+                               <p class="text-gray-600 mb-2">Cardiology & Obstetrics</p>
+                               <p class="text-sm mb-4">Available: 24x7</p>
+                               <button onclick="showConsultationForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">
+                               Book Appointment
+                               </button>
+                            </div>
+                        </div>
+                        <div class="flex-none w-80 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-duration-300">
+                            <img src="./sample_doc2.jpg" alt="Dr. Venkatesh Panguluri" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold">Dr. Venkatesh Panguluri</h3>
+                                <p class="text-gray-600 mb-2">Emergency Medicine</p>
+                                <p class="text-sm mb-4">Available: 24x7</p>
+                                <button onclick="showConsultationForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">
+                                    Book Appointment
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex-none w-80 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-duration-300">
+                            <img src="./sample_doc3.jpg" alt="Dr. Murali Krishna" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold">Dr. Murali Dannavarapu</h3>
+                                <p class="text-gray-600 mb-2">Radiology</p>
+                                <p class="text-sm mb-4">Available: 24x7</p>
+                                <button onclick="showConsultationForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">
+                                    Book Appointment
+                                </button>
+                            </div>
+                        </div>
+                        <div class="flex-none w-80 bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition-duration-300">
+                            <img src="./sample_doc3.jpg" alt="Dr. Hruday Kumar" class="w-full h-64 object-cover">
+                            <div class="p-6">
+                                <h3 class="text-xl font-bold">Dr. Hruday Kumar</h3>
+                                <p class="text-gray-600 mb-2">General Medicine</p>
+                                <p class="text-sm mb-4">Available: 24x7</p>
+                                <button onclick="showConsultationForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">
+                                    Book Appointment
+                                </button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="./sample_doc2.jpg" alt="Dr. Rajesh Menon" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold">Dr. Rajesh Menon</h3>
-                        <p class="text-gray-600 mb-2">Orthopedic Specialist</p>
-                        <p class="text-sm mb-2">8+ years experience</p>
-                        <p class="text-sm mb-4">Available: Mon-Sat, 10AM-6PM</p>
-                        <button onclick="showConsultationForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">
-                            Book Appointment
-                        </button>
-                    </div>
-                </div>
-                <div class="bg-white rounded-xl shadow-md overflow-hidden">
-                    <img src="./sample_doc3.jpg" alt="Dr. Priya Kapoor" class="w-full h-64 object-cover">
-                    <div class="p-6">
-                        <h3 class="text-xl font-bold">Dr. Priya Kapoor</h3>
-                        <p class="text-gray-600 mb-2">Pediatrician</p>
-                        <p class="text-sm mb-2">12+ years experience</p>
-                        <p class="text-sm mb-4">Available: Tue-Sat, 9AM-4PM</p>
-                        <button onclick="showConsultationForm()" class="bg-blue-600 text-white px-4 py-2 rounded-lg w-full hover:bg-blue-700">
-                            Book Appointment
-                        </button>
-                    </div>
-                </div>
+                <button class="scroll-arrow right" onclick="scrollDoctors('right')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
 
     <!-- Reviews Section -->
+
     <section id="reviews" class="py-16 bg-gray-50">
         <div class="container mx-auto px-6">
             <h2 class="text-3xl font-bold text-center mb-12">Patient Reviews</h2>
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Review Cards -->
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex text-yellow-400 mb-2">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
+            <div class="scroll-container">
+                <button class="scroll-arrow left" onclick="scrollReviews('left')">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <div class="scroll-wrapper">
+                    <div class="scroll-content">
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-duration-300">
+                            <div class="flex text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="mb-4 min-h-[80px]">"Excellent service! Got a second opinion that really helped with my treatment decision."</p>
+                            <p class="font-bold">- Rahul M.</p>
+                        </div>
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-duration-300">
+                            <div class="flex text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                            <p class="mb-4 min-h-[80px]">"Very convenient and professional service. The doctors are knowledgeable and caring."</p>
+                            <p class="font-bold">- Priya S.</p>
+                        </div>
+                        <div class="flex-none w-80 bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-duration-300">
+                            <div class="flex text-yellow-400 mb-2">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                            <p class="mb-4 min-h-[80px]">"Quick and efficient consultation process. Saved me a trip to the hospital."</p>
+                            <p class="font-bold">- Amit K.</p>
+                        </div>
                     </div>
-                    <p class="mb-4">"Excellent service! Got a second opinion that really helped with my treatment decision."</p>
-                    <p class="font-bold">- Rahul M.</p>
                 </div>
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex text-yellow-400 mb-2">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                    </div>
-                    <p class="mb-4">"Very convenient and professional service. The doctors are knowledgeable and caring."</p>
-                    <p class="font-bold">- Priya S.</p>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md">
-                    <div class="flex text-yellow-400 mb-2">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                    </div>
-                    <p class="mb-4">"Quick and efficient consultation process. Saved me a trip to the hospital."</p>
-                    <p class="font-bold">- Amit K.</p>
-                </div>
+                <button class="scroll-arrow right" onclick="scrollReviews('right')">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
             </div>
         </div>
     </section>
@@ -264,15 +384,15 @@
                     <div class="space-y-4">
                         <p class="flex items-center">
                             <i class="fas fa-envelope mr-3 text-blue-600 w-5"></i>
-                            <span>support@swasthya.com</span>
+                            <span>swasthya.consluting@gmail.com</span>
                         </p>
                         <p class="flex items-center">
                             <i class="fas fa-phone mr-3 text-blue-600 w-5"></i>
-                            <span>+91 1234567890</span>
+                            <span>+91 8500881023</span>
                         </p>
                         <p class="flex items-start">
                             <i class="fas fa-map-marker-alt mr-3 text-blue-600 w-5 mt-1"></i>
-                            <span>123 Healthcare Avenue,<br>Mumbai, India</span>
+                            <span>123 Healthcare Avenue,<br>Vijayawada, India</span>
                         </p>
                     </div>
                     
@@ -301,14 +421,20 @@
                     <form id="contact-form" class="space-y-6">
                         <div class="grid md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Full Name</label>
-                                <input type="text" name="name" required
-                                    class="w-full px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <label class="form-label">
+                                    <span>Full Name</span>
+                                    <span class="required-field"></span>
+                                </label>
+                                <input type="text" name="Full_Name" required
+                                    class="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
                             </div>
                             <div>
-                                <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                                <input type="email" name="email" required
-                                    class="w-full px-4 py-2 border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                <label class="block text-sm font-medium text-gray-700 mb-1">
+                                    Email
+                                    <span class="optional-text">(Optional)</span>
+                                </label>
+                                <input type="email" name="Email"
+                                    class="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
                             </div>
                         </div>
     
@@ -406,20 +532,24 @@
 
                 <!-- Email -->
                 <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                    <input type="email" name="Email" required
+                    <label class="block text-sm font-medium text-gray-700 mb-1">
+                        Email
+                        <span class="optional-text">(Optional)</span>
+                    </label>
+                    <input type="email" name="Email"
                         class="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500">
                 </div>
 
                 <!-- Doctor Selection -->
                 <div>
                     <label class="block text-sm font-medium text-gray-700 mb-1">Choose Doctor/Specialization</label>
-                    <select name="Selected_Doctor" required
+                    <select name="Selected_Doctor"
                         class="w-full px-3 py-2 border rounded-md text-sm focus:outline-none focus:ring-1 focus:ring-blue-500 bg-white">
                         <option value="">Select a doctor</option>
                         <option value="Dr. Ananya Sharma">Dr. Nandan Vadlamudi - Cardiologist</option>
-                        <option value="Dr. Rajesh Menon">Dr. Rajesh Menon - Orthopedic Specialist</option>
-                        <option value="Dr. Priya Kapoor">Dr. Priya Kapoor - Pediatrician</option>
+                        <option value="Dr. Venkatesh Panguluri">Dr. Venkatesh Panguluri - Emergency Medecine</option>
+                        <option value="Dr. Murali Dannavarapu">Dr. Murali Dannavarapu - Radiology</option>
+                        <option value="Dr. Hruday Kumar">Dr. Hruday Kumar - General Medicine</option>
                     </select>
                 </div>
 
@@ -609,7 +739,7 @@ document.getElementById('consultation-modal').addEventListener('click', function
                 }
                 
                 // Send the request
-                const response = await fetch('https://swasthya-backend-plf7.onrender.com/api/submit-consultation', {
+                const response = await fetch('http://localhost:3000/api/submit-consultation', {
                     method: 'POST',
                     body: formData,
                     // Remove credentials include as it's not needed if we're not using cookies
@@ -747,6 +877,66 @@ document.addEventListener('DOMContentLoaded', function() {
         minuteIncrement: 30,
         defaultHour: 9
     });
+});
+
+function scrollDoctors(direction) {
+    const container = document.querySelector('#doctors .scroll-wrapper');
+    const scrollAmount = direction === 'left' ? -400 : 400;
+    container.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+    });
+}
+
+function scrollReviews(direction) {
+    const container = document.querySelector('#reviews .scroll-wrapper');
+    const scrollAmount = direction === 'left' ? -400 : 400;
+    container.scrollBy({
+        left: scrollAmount,
+        behavior: 'smooth'
+    });
+}
+
+function updateScrollArrows(sectionId) {
+    const container = document.querySelector(`#${sectionId} .scroll-wrapper`);
+    const leftArrow = document.querySelector(`#${sectionId} .scroll-arrow.left`);
+    const rightArrow = document.querySelector(`#${sectionId} .scroll-arrow.right`);
+    
+    if (container && leftArrow && rightArrow) {
+        // Add small threshold to prevent flickering
+        const threshold = 10;
+        leftArrow.style.display = container.scrollLeft > threshold ? 'flex' : 'none';
+        rightArrow.style.display = 
+            Math.ceil(container.scrollLeft + container.clientWidth + threshold) < container.scrollWidth ? 'flex' : 'none';
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    ['doctors', 'reviews'].forEach(sectionId => {
+        updateScrollArrows(sectionId);
+        
+        const container = document.querySelector(`#${sectionId} .scroll-wrapper`);
+        if (container) {
+            container.addEventListener('scroll', () => {
+                requestAnimationFrame(() => updateScrollArrows(sectionId));
+            });
+        }
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    const doctorsContainer = document.querySelector('#doctors .scroll-wrapper');
+    const reviewsContainer = document.querySelector('#reviews .scroll-wrapper');
+    
+    if (doctorsContainer) {
+        doctorsContainer.addEventListener('scroll', () => updateScrollArrows('doctors'));
+        updateScrollArrows('doctors');
+    }
+    
+    if (reviewsContainer) {
+        reviewsContainer.addEventListener('scroll', () => updateScrollArrows('reviews'));
+        updateScrollArrows('reviews');
+    }
 });
     </script>
 </body>
